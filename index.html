@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f5f7fb">
+  <meta name="description" content="Organiza tus medicamentos y recibe recordatorios de cada toma.">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <style>.form-spacer{flex:1}.danger-button{background:#fff0f1;color:#c84f5a;border-radius:11px;padding:12px 14px;font-weight:750}.danger-button:hover{background:#ffe0e3}</style>
+  <title>FarmaTime · Tu tratamiento bajo control</title>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#inicio" aria-label="FarmaTime, inicio"><span class="brand-mark">✚</span><span>Farma<span>Time</span></span></a>
+      <div class="top-actions"><button class="icon-button" id="notificationsButton" title="Activar avisos" aria-label="Activar avisos">♧<span class="status-dot"></span></button><button class="avatar" aria-label="Tu perfil">T</button></div>
+    </header>
+
+    <main id="inicio">
+      <section class="hero">
+        <div><p class="eyebrow">MI TRATAMIENTO</p><h1>Hola, <span>te acompañamos</span></h1><p class="hero-copy">Un día a la vez. Aquí tienes tus tomas organizadas.</p></div>
+        <div class="date-card"><span id="todayName">HOY</span><strong id="todayDate">—</strong></div>
+      </section>
+
+      <section class="next-dose card" id="nextDoseCard">
+        <div class="next-icon">⏱</div><div class="next-content"><span class="section-label">SIGUIENTE TOMA</span><strong id="nextDoseName">Añade tu primer medicamento</strong><p id="nextDoseMeta">Configura una pauta para empezar a organizarte</p></div><span class="countdown" id="nextCountdown">—</span>
+      </section>
+
+      <div class="section-heading"><div><span class="eyebrow">PLAN DE HOY</span><h2>Tus medicamentos</h2></div><button class="primary-button" id="addButton"><span>＋</span> Añadir medicamento</button></div>
+      <section class="progress-card card"><div class="progress-copy"><strong id="progressTitle">Todo listo para hoy</strong><span id="progressText">Añade medicamentos para ver tus tomas.</span></div><div class="progress-ring" id="progressRing"><span id="progressNumber">0%</span></div></section>
+      <section class="med-list" id="medList"></section>
+      <section class="empty-state" id="emptyState"><div class="empty-illustration">💊</div><h3>Tu plan empieza aquí</h3><p>Añade los medicamentos y horarios que te ha indicado tu equipo médico. Te avisaremos en cada toma.</p><button class="secondary-button" id="emptyAddButton">Añadir primer medicamento</button></section>
+
+      <section class="safety-note"><span>ⓘ</span><p>FarmaTime es un organizador de recordatorios. Activa los avisos y permite las notificaciones en tu móvil. Sigue siempre las indicaciones de tu médico o farmacéutico y no cambies una pauta por tu cuenta.</p></section>
+    </main>
+    <footer><span>FarmaTime</span><span>Datos guardados solo en este dispositivo</span></footer>
+  </div>
+
+  <div class="modal-backdrop" id="modalBackdrop" hidden><section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-head"><div><span class="eyebrow">NUEVO TRATAMIENTO</span><h2 id="modalTitle">Añadir medicamento</h2></div><button class="close-button" id="closeModal" aria-label="Cerrar">×</button></div>
+    <form id="medForm"><input type="hidden" id="medId"><div class="field-row"><label class="field wide">Nombre del medicamento<input id="medName" required placeholder="Ej. Amoxicilina"></label><label class="field color-field">Color<span class="color-picker"><input id="medColor" type="color" value="#6d5dfc"><i id="colorPreview"></i></span></label></div>
+      <div class="field-row"><label class="field">Fecha de inicio<input id="startDate" type="date" required></label><label class="field">Fecha de fin<input id="endDate" type="date" required></label></div>
+      <label class="field">Tipo de pauta<select id="scheduleType"><option value="interval">Cada cierto número de horas</option><option value="daily">Una vez al día</option><option value="taper">Pauta descendente por días</option></select></label>
+      <div id="intervalFields" class="schedule-panel"><div class="field-row"><label class="field">Cada<input id="intervalHours" type="number" min="1" max="24" value="8"><small>horas</small></label><label class="field">Dosis por toma<input id="intervalDose" type="number" min="0.25" step="0.25" value="1"><small>comprimido(s)</small></label></div><label class="field">Hora de la primera toma<input id="firstTime" type="time" required></label></div>
+      <div id="dailyFields" class="schedule-panel" hidden><label class="field">Dosis por toma<input id="dailyDose" type="number" min="0.25" step="0.25" value="1"><small>comprimido(s)</small></label><label class="field">Hora de la toma<input id="dailyTime" type="time" value="08:00"></label></div>
+      <div id="taperFields" class="schedule-panel" hidden><p class="helper">Define cada tramo de la pauta. Por ejemplo: 2 comprimidos durante 3 días, después 1 durante 3 días y finalmente ½ durante 2 días.</p><div id="taperSteps"></div><button type="button" class="text-button" id="addStep">＋ Añadir tramo</button><label class="field">Hora de la toma<input id="taperTime" type="time" value="08:00"></label></div>
+      <div class="form-actions"><button type="button" class="danger-button" id="deleteButton" hidden>Eliminar</button><span class="form-spacer"></span><button type="button" class="secondary-button" id="cancelButton">Cancelar</button><button class="primary-button" type="submit">Guardar medicamento</button></div>
+    </form>
+  </section></div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>
