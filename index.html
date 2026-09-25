@@ -8,6 +8,8 @@
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
+  <style>.color-field{max-width:220px}.color-presets{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}.color-swatch{width:19px;height:19px;padding:0;border-radius:50%;background:var(--swatch);border:2px solid #fff;box-shadow:0 0 0 1px #dfe0e8}.color-swatch.selected{box-shadow:0 0 0 2px var(--ink)}.custom-color-button{display:flex;align-items:center;gap:6px;background:transparent;color:var(--violet);font-size:11px;font-weight:700;padding:5px 0 0}.custom-color-button i{width:13px;height:13px;border-radius:50%;background:#6d5dfc;border:1px solid #dfe0e8}</style>
+  <style>.form-actions .primary-button,.form-actions .secondary-button,.form-actions .danger-button{padding:8px 10px;font-size:13px;border-radius:9px}</style>
   <style>.form-spacer{flex:1}.danger-button{background:#fff0f1;color:#c84f5a;border-radius:11px;padding:12px 14px;font-weight:750}.danger-button:hover{background:#ffe0e3}</style>
   <title>FarmaTime · Tu tratamiento bajo control</title>
 </head>
@@ -15,12 +17,12 @@
   <div class="app-shell">
     <header class="topbar">
       <a class="brand" href="#inicio" aria-label="FarmaTime, inicio"><span class="brand-mark">✚</span><span>Farma<span>Time</span></span></a>
-      <div class="top-actions"><button class="icon-button" id="settingsButton" title="Configuración" aria-label="Abrir configuración">⚙︎</button><button class="avatar" aria-label="Tu perfil">T</button></div>
+      <div class="top-actions"><button class="icon-button" id="settingsButton" title="Configuración" aria-label="Abrir configuración">⚙︎</button></div>
     </header>
 
     <main id="inicio">
       <section class="hero">
-        <div><p class="eyebrow">MI TRATAMIENTO</p><h1>Hola, <span>te acompañamos</span></h1><p class="hero-copy">Un día a la vez. Aquí tienes tus tomas organizadas.</p></div>
+        <div><p class="eyebrow">MI TRATAMIENTO</p><h1>Hola, <span>te acompañamos</span></h1><p class="hero-copy">Todas tus medicinas en un mismo lugar.</p></div>
         <div class="date-card"><span id="todayName">HOY</span><strong id="todayDate">—</strong></div>
       </section>
 
@@ -35,11 +37,11 @@
 
       <section class="safety-note"><span>ⓘ</span><p>FarmaTime es un organizador de recordatorios. Sigue siempre las indicaciones de tu médico o farmacéutico y no cambies una pauta por tu cuenta.</p></section>
     </main>
-    <footer><span>FarmaTime</span><span>Datos guardados solo en este dispositivo</span></footer>
+    <footer><span>FarmaTime</span></footer>
   </div>
 
   <div class="modal-backdrop" id="modalBackdrop" hidden><section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal-head"><div><span class="eyebrow">NUEVO TRATAMIENTO</span><h2 id="modalTitle">Añadir medicamento</h2></div><button class="close-button" id="closeModal" aria-label="Cerrar">×</button></div>
-    <form id="medForm"><input type="hidden" id="medId"><div class="field-row"><label class="field wide">Nombre del medicamento<input id="medName" required placeholder="Ej. Amoxicilina"></label><label class="field color-field">Color<span class="color-picker"><input id="medColor" type="color" value="#6d5dfc"><i id="colorPreview"></i></span></label></div>
+    <form id="medForm"><input type="hidden" id="medId"><div class="field-row"><label class="field wide">Nombre del medicamento<input id="medName" required placeholder="Ej. Amoxicilina"></label><label class="field color-field">Color<input id="medColor" type="color" value="#6d5dfc" hidden><span class="color-presets" id="colorPresets"><button type="button" class="color-swatch" data-color="#6d5dfc" style="--swatch:#6d5dfc" aria-label="Violeta"></button><button type="button" class="color-swatch" data-color="#4f7cff" style="--swatch:#4f7cff" aria-label="Azul"></button><button type="button" class="color-swatch" data-color="#26a69a" style="--swatch:#26a69a" aria-label="Verde azulado"></button><button type="button" class="color-swatch" data-color="#55b978" style="--swatch:#55b978" aria-label="Verde"></button><button type="button" class="color-swatch" data-color="#e8b84a" style="--swatch:#e8b84a" aria-label="Amarillo"></button><button type="button" class="color-swatch" data-color="#ec8b45" style="--swatch:#ec8b45" aria-label="Naranja"></button><button type="button" class="color-swatch" data-color="#e477a7" style="--swatch:#e477a7" aria-label="Rosa"></button><button type="button" class="color-swatch" data-color="#d95f67" style="--swatch:#d95f67" aria-label="Rojo"></button></span><button type="button" class="custom-color-button" id="customColorButton"><i id="colorPreview"></i>Elegir otro color</button></label></div>
       <div class="field-row"><label class="field">Fecha de inicio<input id="startDate" type="date" required></label><label class="field">Fecha de fin<input id="endDate" type="date" required></label></div>
       <label class="field">Tipo de pauta<select id="scheduleType"><option value="interval">Cada cierto número de horas</option><option value="daily">Una vez al día</option><option value="taper">Pauta descendente por días</option></select></label>
       <div id="intervalFields" class="schedule-panel"><div class="field-row"><label class="field">Cada<input id="intervalHours" type="number" min="1" max="24" value="8"><small>horas</small></label><label class="field">Dosis por toma<input id="intervalDose" type="number" min="0.25" step="0.25" value="1"><small>comprimido(s)</small></label></div><label class="field">Hora de la primera toma<input id="firstTime" type="time"></label></div>
@@ -48,8 +50,8 @@
       <div class="form-actions"><button type="button" class="danger-button" id="deleteButton" hidden>Eliminar</button><span class="form-spacer"></span><button type="button" class="secondary-button" id="cancelButton">Cancelar</button><button class="primary-button" type="submit">Guardar medicamento</button></div>
     </form>
   </section></div>
-  <div class="modal-backdrop" id="notificationBackdrop" hidden><section class="modal notification-modal" role="dialog" aria-modal="true" aria-labelledby="notificationTitle"><div class="modal-head"><div><span class="eyebrow">RECORDATORIOS</span><h2 id="notificationTitle">No te saltes ninguna toma</h2></div><button class="close-button" id="closeNotification" aria-label="Cerrar">×</button></div><p class="modal-copy">Permite las notificaciones para recibir un aviso cuando llegue la hora de tus medicamentos.</p><label class="check-row"><input type="checkbox" id="dontAskNotifications"><span>No volver a preguntar</span></label><div class="form-actions"><button type="button" class="secondary-button" id="skipNotification">Ahora no</button><button type="button" class="primary-button" id="enableNotifications">Activar avisos</button></div></section></div>
-  <div class="modal-backdrop" id="settingsBackdrop" hidden><section class="modal settings-modal" role="dialog" aria-modal="true" aria-labelledby="settingsTitle"><div class="modal-head"><div><span class="eyebrow">PREFERENCIAS</span><h2 id="settingsTitle">Configuración</h2></div><button class="close-button" id="closeSettings" aria-label="Cerrar">×</button></div><div class="setting-row"><div><strong>Notificaciones</strong><p id="notificationStatus">Comprobando estado…</p></div><button type="button" class="secondary-button" id="settingsNotificationsButton">Activar</button></div><label class="check-row"><input type="checkbox" id="settingsDontAsk"><span>No volver a preguntar al entrar</span></label><p class="modal-hint">Los medicamentos y el historial se guardan únicamente en este dispositivo.</p></section></div>
+  <div class="modal-backdrop" id="notificationBackdrop" hidden><section class="modal notification-modal" role="dialog" aria-modal="true" aria-labelledby="notificationTitle"><div class="modal-head"><div><span class="eyebrow">RECORDATORIOS</span><h2 id="notificationTitle">No te saltes ninguna toma</h2></div><button class="close-button" id="closeNotification" aria-label="Cerrar">×</button></div><p class="modal-copy">Activa las notificaciones y las alarmas exactas para recibir cada aviso a la hora de la toma, aunque FarmaTime esté cerrado o el móvil bloqueado.</p><label class="check-row"><input type="checkbox" id="dontAskNotifications"><span>No volver a preguntar</span></label><div class="form-actions"><button type="button" class="secondary-button" id="skipNotification">Ahora no</button><button type="button" class="primary-button" id="enableNotifications">Activar avisos</button></div></section></div>
+  <div class="modal-backdrop" id="settingsBackdrop" hidden><section class="modal settings-modal" role="dialog" aria-modal="true" aria-labelledby="settingsTitle"><div class="modal-head"><div><span class="eyebrow">PREFERENCIAS</span><h2 id="settingsTitle">Configuración</h2></div><button class="close-button" id="closeSettings" aria-label="Cerrar">×</button></div><div class="setting-row"><div><strong>Notificaciones</strong><p id="notificationStatus">Comprobando estado…</p></div><button type="button" class="secondary-button" id="settingsNotificationsButton">Activar</button></div><label class="check-row"><input type="checkbox" id="settingsDontAsk"><span>No volver a preguntar al entrar</span></label></section></div>
   <div class="toast" id="toast" role="status"></div>
   <script src="capacitor.js"></script>
   <script src="local-notifications.js"></script>
