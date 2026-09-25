@@ -1,0 +1,22 @@
+{
+  "name": "farmatime",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "FarmaTime, organizador local de tratamientos",
+  "scripts": {
+    "prepare:web": "mkdir -p www && cp index.html styles.css app.js manifest.webmanifest icon.svg sw.js capacitor.js local-notifications.js www/",
+    "android": "npm run prepare:web && npx cap sync android && npx cap open android",
+    "android:sync": "npm run prepare:web && npx cap sync android",
+    "android:run": "npx cap run android"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.5.2",
+    "@capacitor/core": "^8.5.2",
+    "@capacitor/local-notifications": "^8.3.1"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^8.5.2",
+    "typescript": "^7.0.2"
+  }
+}
