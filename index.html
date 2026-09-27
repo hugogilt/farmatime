@@ -46,6 +46,24 @@
   <style>.taper-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) 37px;gap:8px;align-items:end}.taper-row .field{min-width:0;margin-bottom:0}.taper-row .remove-step{align-self:end;margin:0}</style>
   <style>.taper-row{grid-template-rows:auto auto;align-items:center}.taper-control{grid-row:1 / span 2;display:flex;flex-direction:column;gap:7px;min-width:0;color:#4b506a;font-size:12px;font-weight:700}.taper-control input{display:block;width:100%;min-width:0;border:1px solid #dddfea;border-radius:11px;padding:12px;color:var(--ink);background:#fff;outline:0}.taper-row .remove-step{grid-row:2;align-self:center;margin:0}</style>
   <style>#taperRows{display:flex;flex-direction:column;gap:12px}</style>
+  <style>.pwa-mode #settingsButton{font-size:29px;padding:5px}</style>
+  <style>
+    /* Alineación estable en WebView Android para los controles con glifos */
+    .editor-screen .dose-stepper button{
+      display:grid;
+      place-items:center;
+      padding:0 0 2px;
+      line-height:1;
+      text-indent:0;
+    }
+    .editor-screen .back-button{
+      display:grid;
+      place-items:center;
+      padding:0 0 3px;
+      line-height:1;
+      text-indent:0;
+    }
+  </style>
   <style>.next-dose.empty-next{cursor:pointer}.next-dose.empty-next:hover{border-color:#dcd9ff;box-shadow:0 10px 24px rgba(99,91,223,.13)}.next-dose.empty-next:focus-visible{outline:3px solid #c9c5ff;outline-offset:3px}</style>
   <style>.data-backup{margin-top:22px;padding-top:18px;border-top:1px solid var(--line)}.data-backup>strong{display:block;margin-top:5px;font-size:14px}.data-backup>p:not(.section-label){color:var(--muted);font-size:12px;line-height:1.45;margin:5px 0 13px}.data-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px}.data-actions button{padding:10px 8px;font-size:12px}</style>
   <style>.timeline-group{position:relative}.timeline-group.overdue .timeline-time{color:#b97922}.timeline-group.overdue .timeline-content{border-left-color:#e7bd7c;background:#fffaf2;border-radius:0 14px 14px 0;padding-top:2px;padding-bottom:7px}.overdue-label{position:absolute;left:63px;top:10px;display:block;padding:2px 7px;background:#fffaf2;color:#b97922;border-radius:6px;font-size:11px;font-weight:800;line-height:1.1;letter-spacing:.2px;text-transform:uppercase;white-space:nowrap;z-index:1}@media(max-width:520px){.overdue-label{left:56px}}</style>

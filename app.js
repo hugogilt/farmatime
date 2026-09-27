@@ -1,3 +1,4 @@
+document.documentElement.classList.toggle('pwa-mode',!(window.Capacitor?.isNativePlatform?.()||window.Capacitor?.isNative));
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const storageKey='farmatime-medications-v1',takenKey='farmatime-taken-v1',historyKey='farmatime-history-v1',selectedDayKey='farmatime-selected-day-v1';
 let meds=JSON.parse(localStorage.getItem(storageKey)||'[]'),taken=JSON.parse(localStorage.getItem(takenKey)||'{}'),history=JSON.parse(localStorage.getItem(historyKey)||'[]');
